@@ -13,10 +13,8 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    // JDA 라이브러리 추가
     implementation 'net.dv8tion:JDA:5.0.0-beta.2'
 
-    // dotenv-java 라이브러리 추가
     implementation 'io.github.cdimascio:dotenv-java:2.2.4'
 }
 
