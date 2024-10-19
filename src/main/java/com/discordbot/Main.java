@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class Main extends ListenerAdapter {
     public static void main(String[] args) throws Exception {
-        // .env 파일에서 환경 변수를 로드합니다
+        // .env 파일에서 환경 변수를 불러옴
         Dotenv dotenv = Dotenv.load();
         String token = dotenv.get("DISCORD_BOT_TOKEN");
 
