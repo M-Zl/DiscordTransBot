@@ -33,6 +33,7 @@ public class Main extends ListenerAdapter {
 
         jda.awaitReady(); // 봇이 준비될 때까지 대기
         System.out.println("█ █ █ █ █ █ █  봇이 준비되었습니다!!  █ █ █ █ █ █ █");
+        System.out.println(".env 확인");
     }
 
     // 그냥 해보고 싶었음;;
