@@ -42,7 +42,7 @@ bin/
 .DS_Store
 
 # Ignore .env files (My discord token)
-
+.env
 
 # Ignore build and output directories
 /build/
