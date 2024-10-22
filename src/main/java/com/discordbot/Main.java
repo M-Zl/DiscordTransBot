@@ -1,5 +1,6 @@
 package com.discordbot;
 
+import com.discordbot.config.BotConfig;
 import com.discordbot.events.MemberJoinHandler;
 import com.discordbot.events.MessageHandler;
 import net.dv8tion.jda.api.JDA;
@@ -14,11 +15,10 @@ public class Main extends ListenerAdapter {
     public static void main(String[] args) throws Exception {
         printLogo();
 
-        // .env에서 환경 변수를 불러온다.(DISCORD_BOT_TOKEN)
-        Dotenv dotenv = Dotenv.load();
-        String token = dotenv.get("DISCORD_BOT_TOKEN");
+        // BotConfig 클래스에서 환경 변수(DISCORD_BOT_TOKEN) 불러오기
+        String token = BotConfig.getToken();
 
-        // 토큰이 없으면 경고 출력
+        // 토큰이 없으면 경고 출력 후 종료
         if (token == null || token.isEmpty()) {
             System.out.println("DISCORD_BOT_TOKEN 환경 변수가 설정되지 않았습니다.");
             return;
