@@ -1,14 +1,15 @@
 package com.discordbot;
 
+import java.util.*;
 import com.discordbot.config.BotConfig;
 import com.discordbot.events.MemberJoinHandler;
 import com.discordbot.events.MessageHandler;
+import com.discordbot.services.TranslationService;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import io.github.cdimascio.dotenv.Dotenv;
-import java.util.*;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Main extends ListenerAdapter {
 
@@ -24,11 +25,14 @@ public class Main extends ListenerAdapter {
             return;
         }
 
+        // Google Translation Service 초기화
+        TranslationService translationService = new TranslationService();
+
         // JDA 빌더로 봇을 초기화하고, 이벤트 핸들러를 추가
         JDA jda = JDABuilder.createDefault(token,
                         EnumSet.of(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT))  // 메시지 콘텐츠 접근 인텐트 추가
                 .addEventListeners(new MemberJoinHandler())  // 신규 유저 입장 이벤트 리스너 등록
-                .addEventListeners(new MessageHandler()) // 메시지 이벤트 리스너 추가
+                .addEventListeners(new MessageHandler(translationService)) // 메시지 이벤트 리스너 추가
                 .build();
 
         jda.awaitReady(); // 봇이 준비될 때까지 대기
