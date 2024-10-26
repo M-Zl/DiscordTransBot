@@ -1,10 +1,17 @@
 package com.discordbot.events;
 
+import com.discordbot.services.TranslationService;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class MessageHandler extends ListenerAdapter {
+
+    private final TranslationService translationService;
+
+    public MessageHandler(TranslationService translationService) {
+        this.translationService = translationService;
+    }
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -33,6 +40,22 @@ public class MessageHandler extends ListenerAdapter {
             // "화이팅"
             if (content.equalsIgnoreCase("!화이팅")) {
                 event.getChannel().sendMessage("가보자고!!👊").queue();
+            }
+
+            // "!translate [언어] [문장]" 명령어 처리
+            if (content.startsWith("!t")) {
+                String[] parts = content.split(" ", 3);
+                if (parts.length < 3) {
+                    event.getChannel().sendMessage("사용법: !t [언어코드] [문장]").queue();
+                    return;
+                }
+
+                String targetLanguage = parts[1];
+                String textToTranslate = parts[2];
+
+                // 번역 요청
+                String translatedText = translationService.translateText(textToTranslate, targetLanguage);
+                event.getChannel().sendMessage("번역 결과: " + translatedText).queue();
             }
         } catch (Exception e) {
             System.err.println("유저 메세지를 읽는 중 오류 발생 ::: " + e.getMessage());
