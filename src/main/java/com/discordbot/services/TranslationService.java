@@ -1,5 +1,6 @@
 package com.discordbot.services;
 
+import com.google.cloud.translate.Detection;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
@@ -16,6 +17,12 @@ public class TranslationService {
 
         // Google Translate 서비스 초기화
         translate = TranslateOptions.newBuilder().setApiKey(apiKey).build().getService();
+    }
+
+    // 언어 감지 메소드
+    public String detectLanguage(String text) {
+        Detection detection = translate.detect(text);
+        return detection.getLanguage(); // 언어 코드 반환 (예: "ko", "zh", "en")
     }
 
     // 번역 메소드
