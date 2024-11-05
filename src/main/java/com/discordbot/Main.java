@@ -9,7 +9,8 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import io.github.cdimascio.dotenv.Dotenv;
+
+import java.util.EnumSet;
 
 public class Main extends ListenerAdapter {
 

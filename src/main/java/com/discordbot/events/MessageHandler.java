@@ -106,6 +106,9 @@ public class MessageHandler extends ListenerAdapter {
         System.out.println("감지된 언어: " + detectedLanguage);
         System.out.println("번역할 내용: " + content);
 
+        // 단어 교체를 위한 전처리
+        String preProcessedContent = translationService.preProcessMessage(content, detectedLanguage);
+
         if (detectedLanguage.equals("ko")) {
             // 메시지가 한국어이면 중국어로 번역
             String translatedText = translationService.translateText(content, "zh");
